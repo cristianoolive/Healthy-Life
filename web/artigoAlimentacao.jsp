@@ -30,6 +30,7 @@
             var database = firebase.database();
             var storage = firebase.storage();
         </script>
+        <link rel="icon" href="life2.png" type="image/png"/>
     </head>
     <body>
         <jsp:include page="cabecalho.jsp"></jsp:include>
@@ -96,7 +97,11 @@
                 }
 
                 var variavel = queryString("chamarId");
-
+                
+                function naoContem(){
+                    alert("nenhum artigo encontrado");
+                }
+                
                 function adicionarPrevia(informacao, id) {
                     var artigoId = informacao.artigoId;
 
@@ -184,6 +189,9 @@
 
 
                     }
+                    
+                        
+                   
                 }
             </script>
         </body>

@@ -27,6 +27,7 @@
             var database = firebase.database();
             var storage = firebase.storage();
         </script>
+        <link rel="icon" href="life2.png" type="image/png"/>
     </head>
     <body>
 
@@ -60,82 +61,100 @@
                     snapshot.forEach(value => {
                         adicionarPrevia(value.val(), id);
                     });
-                   
+
                 });
             }
 
 
             function adicionarPrevia(informacao, id) {
                 var artigoId = informacao.artigoId;
-                
-                    var table = document.createElement("table");
-                    table.setAttribute("class", "table table-hover");
 
-                    var thead = document.createElement("thead");
-                    table.appendChild(thead);
+                var table = document.createElement("table");
+                table.setAttribute("class", "table table-hover");
 
-                    var tr = document.createElement("tr");
-                    thead.appendChild(tr);
+                var thead = document.createElement("thead");
+                table.appendChild(thead);
 
-                    var th = document.createElement("th");
-                    th.setAttribute("scope", "col");
-                    th.innerText = "Titulo";
-                    tr.appendChild(th);
+                var tr = document.createElement("tr");
+                thead.appendChild(tr);
 
-                    var th = document.createElement("th");
-                    th.setAttribute("scope", "col");
-                    th.innerText = "Autor";
-                    tr.appendChild(th);
+                var th = document.createElement("th");
+                th.setAttribute("scope", "col");
+                th.innerText = "Titulo";
+                tr.appendChild(th);
 
-                    var th = document.createElement("th");
-                    th.setAttribute("scope", "col");
-                    th.innerText = "Categoria";
-                    tr.appendChild(th);
+                var th = document.createElement("th");
+                th.setAttribute("scope", "col");
+                th.innerText = "Autor";
+                tr.appendChild(th);
 
-                    var th = document.createElement("th");
-                    th.setAttribute("scope", "col");
-                    th.innerText = "Opções";
-                    tr.appendChild(th);
+                var th = document.createElement("th");
+                th.setAttribute("scope", "col");
+                th.innerText = "Categoria";
+                tr.appendChild(th);
 
-                    var tbody = document.createElement("tbody");
-                    table.appendChild(tbody);
+                var th = document.createElement("th");
+                th.setAttribute("scope", "col");
+                th.innerText = "Opções";
+                tr.appendChild(th);
 
-                    var tr = document.createElement("tr");
-                    tbody.appendChild(tr);
+                var tbody = document.createElement("tbody");
+                table.appendChild(tbody);
 
-                    var td = document.createElement("td");
-                    td.innerHTML = informacao.titulo;
-                    tr.appendChild(td);
+                var tr = document.createElement("tr");
+                tbody.appendChild(tr);
 
-                    var td = document.createElement("td");
-                    td.innerHTML = informacao.autor;
-                    tr.appendChild(td);
+                var td = document.createElement("td");
+                td.innerHTML = informacao.titulo;
+                tr.appendChild(td);
 
-                    var td = document.createElement("td");
-                    td.innerHTML = informacao.classificacao;
-                    tr.appendChild(td);
+                var td = document.createElement("td");
+                td.innerHTML = informacao.autor;
+                tr.appendChild(td);
 
-                    var td = document.createElement("td");
-                    tr.appendChild(td);
+                var td = document.createElement("td");
+                td.innerHTML = informacao.classificacao;
+                tr.appendChild(td);
 
-                    var button = document.createElement("button");
-                    button.setAttribute("class", "btn btn-danger");
-                    button.innerHTML = "Excluir";
-                    td.appendChild(button);
+                var td = document.createElement("td");
+                tr.appendChild(td);
 
-
-
-
-
-                    var listar = document.getElementById("listar");
-                    listar.appendChild(table);
-
-                    //button.innerHTML = options.innerHTML + "<button type="button">Clique</button>";
+                var button = document.createElement("button");
+                button.setAttribute("class", "btn btn-danger");
+                button.onclick = function() { deletar(artigoId); };
+                button.innerHTML = "Excluir";
+                td.appendChild(button);
 
 
 
-                   
-                
+
+
+                var listar = document.getElementById("listar");
+                listar.appendChild(table);
+
+                //button.innerHTML = options.innerHTML + "<button type="button">Clique</button>";
+
+
+
+
+
+            }
+
+            function deletar(artigoId) {
+                firebase.database().ref('artigo').child(artigoId).remove().then(() => {
+
+                });
+
+                firebase.storage().ref('ImgArtigo/' + artigoId).child(informacao.titulo).delete().then(function () {
+                }).catch(function (error) {
+                    console.log("erro: ", error);
+                });
+                 firebase.storage().ref("Artigo/" + artigoId).child(informacao.titulo).delete().then(function () {
+                 }).catch(function (error) {
+                 console.log("erro: ", error);
+                 
+                 });
+                 window.location="administradorListarArtigo.jsp";
             }
         </script>
 

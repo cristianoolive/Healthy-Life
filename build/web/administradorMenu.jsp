@@ -11,13 +11,14 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <link rel="icon" href="life2.png" type="image/png"/>
     </head>
     
     <body>
         <div style="text-align: center;">
             <br>
             <div style="text-align: right; position: inherit">
-                <button onclick="logout()" class="btn font-weight-bolder" style="background-color:aliceblue">Deslogar</button>
+                <button onclick="logout()" class="btn font-weight-bolder" style="background-color:aliceblue">Logoff</button>
             </div>
             <h3 style="margin: 0 auto; color: black">Administador</h3>
             <br>

@@ -1,5 +1,3 @@
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -15,6 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="icon" href="life2.png" type="image/png"/>
 
     <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
     <script>
@@ -35,7 +34,7 @@
 
     <jsp:include page="cabecalho.jsp" />
 
-    <div class="container" id="divprincipal">
+    <!--<div class="container" id="divprincipal">
         <div class="container" id="carrossel" >
 
             <div id="demo" class="carousel slide" data-ride="carousel">
@@ -76,19 +75,19 @@
         </div>
         <div class="container " id="divloginPrincipal">
 
-            <!--  
-            <div class="form-group" id="divtextlogin">
-              <label for="email">Email address:<input type="email" class="form-control" id="email" style=""></label>
-            </div>
-            <div >
-              <label for="pwd">Password:<input type="password" class="form-control" id="senha"></label>
-            </div> 
-              <a href="index.html"><button type="button" class="btn justify-content-center text-body font-weight-bolder" style="background-color:aliceblue; position: relative; float:left;left: 40px;width: 90px;height: 40px;top: 10px ">Entrar</button></a>
-            <a href="cadastroPrincipal.html"><button type="button">Cadastrar</button></a>-->
-        </div>    
+    <!--  
+    <div class="form-group" id="divtextlogin">
+      <label for="email">Email address:<input type="email" class="form-control" id="email" style=""></label>
     </div>
+    <div >
+      <label for="pwd">Password:<input type="password" class="form-control" id="senha"></label>
+    </div> 
+      <a href="index.html"><button type="button" class="btn justify-content-center text-body font-weight-bolder" style="background-color:aliceblue; position: relative; float:left;left: 40px;width: 90px;height: 40px;top: 10px ">Entrar</button></a>
+    <a href="cadastroPrincipal.html"><button type="button">Cadastrar</button></a>
+</div>    
+</div>-->
 
-
+    <br>
     <article id="articleExercicio">
         <h1 class="text-center" id="tituloCategorias">EXERCÍCIOS FÍSICOS</h1>
 
@@ -186,7 +185,7 @@
 
                 var div1 = document.createElement("div");
                 div1.setAttribute("class", "card");
-                div.appendChild(div1);
+                
 
                 var img = document.createElement("img");
                 img.setAttribute("width", "100px");
@@ -199,7 +198,7 @@
 
                 var div2 = document.createElement("div");
                 div2.setAttribute("class", "card-body");
-                div1.appendChild(div2);
+                //div1.appendChild(div2);
 
 
                 var h5 = document.createElement("h5");
@@ -208,15 +207,23 @@
                 h5.innerHTML = informacao.titulo;
                 div2.appendChild(h5);
                 div1.appendChild(div2);
-
+                div.appendChild(div1);
 
                 var button = document.createElement("button");
                 button.setAttribute("style", "text-align: justify;");
                 button.setAttribute("class", "btn btn-dark");
                 button.innerHTML = "Ir";
+                var chamarId = artigoId;
+                button.onclick = function () {
+                    chamar(chamarId);
+                };
+                function chamar(chamarId) {
+                    window.location.href = "artigoExercicio.jsp?chamarId=" + chamarId;
+
+                }
                 div2.appendChild(button);
                 div1.appendChild(div2);
-
+                div.appendChild(div1);
 
                 var articleAlimentacao = document.getElementById("articleExercicio");
                 articleExercicio.appendChild(div);
@@ -231,9 +238,11 @@
 
                 var div1 = document.createElement("div");
                 div1.setAttribute("class", "card");
-                div.appendChild(div1);
+                div1.setAttribute("style", "width: 14rem");
+                //div.appendChild(div1);
 
                 var img = document.createElement("img");
+                img.setAttribute("class", "card-img-top");
                 img.setAttribute("width", "100px");
                 img.setAttribute("id", artigoId);
                 div1.appendChild(img);
@@ -241,11 +250,12 @@
                 firebase.storage().ref('ImgArtigo/' + artigoId).child(informacao.titulo).getDownloadURL().then(url => {
                     fotopreview.src = url;
                 });
+                
 
                 var div2 = document.createElement("div");
                 div2.setAttribute("class", "card-body");
                 div1.appendChild(div2);
-
+                
                 var h5 = document.createElement("h5");
                 h5.setAttribute("id", "corpoCard");
                 h5.setAttribute("class", "card-title");
@@ -256,8 +266,14 @@
                 button.setAttribute("style", "text-align: justify;");
                 button.setAttribute("class", "btn btn-dark");
                 button.innerHTML = "Ir";
-                div2.appendChild(button);
+                var chamarId = artigoId;
+                        button.onclick = function() { chamar(chamarId); };
+                          function chamar(chamarId) {    
+                            window.location.href = "artigoAlimentacao.jsp?chamarId="+chamarId;
 
+                        }
+                div2.appendChild(button);
+                div.appendChild(div1);
                 var articleAlimentacao = document.getElementById("articleAlimentacao");
                 articleAlimentacao.appendChild(div);
 
@@ -270,9 +286,11 @@
 
                 var div1 = document.createElement("div");
                 div1.setAttribute("class", "card");
+                div1.setAttribute("style", "width: 14rem;");
                 div.appendChild(div1);
 
                 var img = document.createElement("img");
+                img.setAttribute("class", "card-img-top");
                 img.setAttribute("width", "100px");
                 img.setAttribute("id", artigoId);
                 div1.appendChild(img);
@@ -280,7 +298,7 @@
                     document.getElementById(artigoId).src = url;
                 });
 
-                
+
 
                 var div2 = document.createElement("div");
                 div2.setAttribute("class", "card-body");
@@ -296,6 +314,12 @@
                 button.setAttribute("style", "text-align: justify;");
                 button.setAttribute("class", "btn btn-dark");
                 button.innerHTML = "Ir";
+                var chamarId = artigoId;
+                        button.onclick = function() { chamar(chamarId); };
+                          function chamar(chamarId) {    
+                            window.location.href = "artigoReceita.jsp?chamarId="+chamarId;
+
+                        }
                 div2.appendChild(button);
 
                 var articleAlimentacao = document.getElementById("articleReceita");

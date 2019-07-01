@@ -11,6 +11,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <link rel="icon" href="life2.png" type="image/png"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
               integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
         <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase.js"></script>
@@ -124,14 +125,9 @@
                         div.appendChild(img);
 
                         firebase.storage().ref('ImgArtigo/' + variavel).child(informacao.titulo).getDownloadURL().then(url => {
-
-                          
                             document.getElementById("fotoD").src = url;
                            
                         });
-
-
-
 
                         //refEst = storageRef.child('ImgArtigo' + artigoId);
                         //refEst.getDownloadURL().then(function (url) {
@@ -146,24 +142,21 @@
                         p.setAttribute("style", "text-align: 18px");
                         p.innerHTML = informacao.resumo;
                         div.appendChild(p);
-
+                        
+                        var center = document.createElement("center");
+                        
                         var iframe = document.createElement("iframe");
                         iframe.setAttribute("width", "700");
                         iframe.setAttribute("height", "1000");
                         iframe.setAttribute("id", "artigo");
                         iframe.setAttribute("style", "border: none");
-                        div.appendChild(iframe);
+                        center.appendChild(iframe);
+                        div.appendChild(center);
                         firebase.storage().ref('Artigo/' + variavel).child(informacao.titulo).getDownloadURL().then(url => {
                             var artigo = document.getElementById("artigo");
                             artigo.src = url;
                         });
                         
-                       //  firebase.storage().ref('Regras').child(nome).getDownloadURL().then(url => {
-            //console.log("string para download", url);
-        //});
-
-
-
                         var br = document.createElement("br");
                         div.appendChild(br);
                         div.appendChild(br);
